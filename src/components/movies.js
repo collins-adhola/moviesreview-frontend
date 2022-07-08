@@ -33,6 +33,22 @@ const Movie = (props) => {
     getMovie(props.match.params.id);
   }, [props.match.params.id]);
 
+  const deleteReview = (reviewId, index) => {
+    movieDataService
+      .deleteReview(reviewId, props.user.id)
+      .then((response) => {
+        setMovie((prevState) => {
+          prevState.reviews.splice(index, 1);
+          return {
+            ...prevState,
+          };
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <div>
       <Container>
@@ -77,7 +93,12 @@ const Movie = (props) => {
                           </Link>
                         </Col>
                         <Col>
-                          <Button variant="Link">Delete</Button>
+                          <Button
+                            variant="Link"
+                            onClick={() => deleteReview(review._id, index)}
+                          >
+                            Delete
+                          </Button>
                         </Col>
                       </Row>
                     )}
