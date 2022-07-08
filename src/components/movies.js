@@ -52,7 +52,6 @@ const Movie = (props) => {
                 )}
               </Card.Body>
             </Card>
-            <br></br>
             <h2>Reviews</h2>
             <br></br>
             {movie.reviews.map((review, index) => {
@@ -60,17 +59,16 @@ const Movie = (props) => {
                 <Card key={index}>
                   <Card.Body>
                     <h5>
-                      {review.name + " reviewed on "}
+                      {review.name + " reviewed on "}{" "}
                       {moment(review.date).format("Do MMMM YYYY")}
                     </h5>
                     <p>{review.review}</p>
                     {props.user && props.user.id === review.user_id && (
                       <Row>
                         <Col>
-                          {" "}
                           <Link
                             to={{
-                              pathName:
+                              pathname:
                                 "/movies/" + props.match.params.id + "/review",
                               state: { currentReview: review },
                             }}
@@ -79,7 +77,7 @@ const Movie = (props) => {
                           </Link>
                         </Col>
                         <Col>
-                          <Button variant="link">Delete</Button>
+                          <Button variant="Link">Delete</Button>
                         </Col>
                       </Row>
                     )}
